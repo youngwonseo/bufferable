@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ticket-api
+          uri: http://localhost:9000
+          predicates:
+            - Path=/api/v{version:\d+}/tickets/**
+server:
+  shutdown: graceful
+management:
+  endpoint:
+    gateway:
+      enabled: true # default value
+  endpoints:
+    web:
+      exposure:
+        include: gateway
